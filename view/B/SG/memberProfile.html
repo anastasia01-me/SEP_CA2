@@ -45,7 +45,8 @@
                     }
                 })).then(function (response) {
                     return response.json();
-                }).then(function (boughtItem) {
+                })
+                .then(function (boughtItem) {
                     if (boughtItem == null || boughtItem == '') { //if member do not have any bought items
                         document.getElementById("salesHistoryTab").innerHTML = '<h5 class="center">You do not have any sales history.</h5>';
                     }
@@ -55,14 +56,19 @@
                         var overallPrice = 0;
                         var finalPrice = 0;
                         //get all order IDs
+
                         for (i = 0; i < boughtItem.length; i++) {
                             orderIdList[i] = boughtItem[i].id;
                         }
+
                         //unduplicate order IDs
                         orderIdList = [...new Set(orderIdList)];
+
                         var temp;
+
                         var size = orderIdList.length;
                         //sort order ID in ascending order
+
                         for (i = 0; i < size - 1; i++) {
                             for (j = 0; j < size - i - 1; j++) {
                                 if (orderIdList[j] > orderIdList[j + 1]) {
@@ -73,7 +79,7 @@
                             }
                         }
 
-                        htmlTxt += '<h5>Order #' + (1) + '</h5>';
+                        htmlTxt += '<h5>Order #' + 1 + '</h5>';
                         var counter = 0;
                         //get bought items by order ID
                         for (j = 0; j < boughtItem.length; j++) {
@@ -81,14 +87,12 @@
                             if (boughtItem[j].id == orderIdList[0]) {
                                 var item = boughtItem[j];
                                 //display top level info
-                                
                                 if (counter == 0) {
 
                                     let options = {
                                         weekday: "long", year: "numeric", month: "long",
                                         day: "numeric", hour: "2-digit", minute: "2-digit"
                                     };
-
                                     var datePurchased = (new Date(item.createddate)).toLocaleTimeString('en-us', options);
                                     var deliveryDate = addWorkDays(new Date(item.createddate), 5);
                                     htmlTxt += '\
@@ -103,6 +107,10 @@
                                 }
                             }
                         }
+
+                        // ====================================
+                        // this is where i need to edit the code
+                        // ====================================
                         //display table info
                         htmlTxt += '\
                                 <div class="row">\
@@ -196,15 +204,16 @@
             var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             return startDate.toLocaleDateString("en-US", options);
         }
-
-
+        //  ============================================================================================================
 
         async function submitForm() {
             var oldPassword = document.getElementById('oldPassword').value;
             var password = document.getElementById("password").value;
             var repassword = document.getElementById("repassword").value;
             var ok = true;
-            console.log(oldPassword)
+
+            console.log(oldPassword);
+
             if (document.getElementById("profileForm").checkValidity()) {
                 if (oldPassword != "" && password != "" && repassword != "") {
                     var memberData = {
@@ -289,6 +298,7 @@
         }
 
         function pdpaWindow() {
+
             var myWindow = window.open("pdpa.html");
         }
     </script>
