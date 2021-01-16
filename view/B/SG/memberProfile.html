@@ -3,6 +3,7 @@
 <script src="../../header.js"></script>
 
 <body>
+
     <script>
         var authToken = null;
         var countryPrefix = localStorage.getItem('urlPrefix');
@@ -80,11 +81,14 @@
                             if (boughtItem[j].id == orderIdList[0]) {
                                 var item = boughtItem[j];
                                 //display top level info
+                                
                                 if (counter == 0) {
+
                                     let options = {
                                         weekday: "long", year: "numeric", month: "long",
                                         day: "numeric", hour: "2-digit", minute: "2-digit"
                                     };
+
                                     var datePurchased = (new Date(item.createddate)).toLocaleTimeString('en-us', options);
                                     var deliveryDate = addWorkDays(new Date(item.createddate), 5);
                                     htmlTxt += '\
@@ -288,7 +292,9 @@
             var myWindow = window.open("pdpa.html");
         }
     </script>
+
     <script src="menu2.js"></script>
+
     <div role="main" class="main">
         <section class="page-top">
             <div class="container">
