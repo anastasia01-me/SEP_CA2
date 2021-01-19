@@ -3,6 +3,7 @@ var app = express();
 let middleware = require('./middleware');
 
 var member = require('../model/memberModel.js');
+
 app.get('/api/memberAuthState', middleware.checkToken, function (req, res) {
     var email = req.query.email;
     member.getMemberAuthState(email)
@@ -28,7 +29,9 @@ app.get('/api/getMember', function (req, res) {
 });
 
 app.get('/api/getBoughtItem/:id', middleware.checkToken, function (req, res) {
+
     var id = req.params.id;
+
     member.getBoughtItem(id)
         .then((result) => {
             res.send(result);
@@ -78,8 +81,10 @@ app.get('/api/getPasswordResetCode', function (req, res) {
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json({ extended: false });
 app.post('/api/loginMember', jsonParser, function (req, res) {
+
     var email = req.body.email;
     var password = req.body.password;
+
     member.checkMemberLogin(email, password)
         .then((result) => {
             res.send(result);
