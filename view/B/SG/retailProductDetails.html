@@ -20,7 +20,11 @@
                 }).then(function (product) {
                     //set retail product details
                     document.getElementById("productImg").setAttribute('src', product.imageURL);
-
+                    //<--------Bug fix start--------->
+                        document.getElementById("productName").innerHTML = product.name;
+                    document.getElementById("productPrice").innerHTML = '$'+product.price.toFixed(2);
+                    document.getElementById("productDesc").innerHTML = product.description;
+                    //<--------Bug fix end--------->
                     document.getElementById("productCategory").innerHTML = product.category;
                     document.getElementById("productCategory").setAttribute('href', '/B/' + countryPrefix
                         + '/retailProductsCategory.html?cat=' + encodeURIComponent(product.category));
